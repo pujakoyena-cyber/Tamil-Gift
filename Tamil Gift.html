@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VAST — Vanan Advanced Sciences and Technology</title>
+<meta name="description" content="VAST is a full-spectrum hardware engineering company based in Singapore and India — PCB design, embedded firmware, and turn-key electronics manufacturing, from concept to production.">
+<meta property="og:title" content="VAST — Vanan Advanced Sciences and Technology">
+<meta property="og:description" content="Full-spectrum hardware engineering: multilayer PCB design, embedded firmware, IoT, EV BMS, and contract electronics manufacturing. Singapore and India.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#060b1a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23060b1a'/%3E%3Ctext x='16' y='22' font-family='Arial' font-weight='700' font-size='18' fill='%234f8fff' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-void: #060b1a;
+    --bg-panel: #0d1830;
+    --bg-panel-raised: #122142;
+    --line-grid: rgba(125,168,224,0.12);
+    --line-strong: rgba(125,168,224,0.32);
+    --ink: #e7eef9;
+    --ink-muted: #7c93b8;
+    --ink-dim: #4d5f80;
+    --copper: #4f8fff;
+    --copper-dim: #2c5fc7;
+    --copper-glow: rgba(79,143,255,0.45);
+    --cyan: #a8d0ff;
+    --cyan-glow: rgba(168,208,255,0.35);
+    --panel-glass: rgba(18,33,66,0.55);
+    --panel-glass-border: rgba(168,208,255,0.14);
+    --sheet-max: 1180px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse 1200px 700px at 50% -10%, rgba(79,143,255,0.10), transparent 60%),
+      var(--bg-void);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    background-image:
+      radial-gradient(ellipse 1200px 700px at 50% -10%, rgba(79,143,255,0.10), transparent 60%),
+      url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27240%27%3E%0A%3Cg%20fill%3D%27none%27%20stroke%3D%27rgba%28122%2C163%2C224%2C0.16%29%27%20stroke-width%3D%271.2%27%3E%0A%3Cpath%20d%3D%27M0%2040%20H60%20V90%20H140%27/%3E%0A%3Cpath%20d%3D%27M240%2060%20H180%20V20%27/%3E%0A%3Cpath%20d%3D%27M0%20150%20H50%20V200%20H120%20V240%27/%3E%0A%3Cpath%20d%3D%27M240%20180%20H190%20V140%20H150%20V90%27/%3E%0A%3Cpath%20d%3D%27M100%200%20V40%20H40%27/%3E%0A%3Cpath%20d%3D%27M160%20240%20V190%20H210%27/%3E%0A%3Cpath%20d%3D%27M0%20220%20H20%27/%3E%0A%3Cpath%20d%3D%27M220%200%20V20%27/%3E%0A%3C/g%3E%0A%3Cg%20fill%3D%27none%27%20stroke%3D%27rgba%28122%2C163%2C224%2C0.26%29%27%20stroke-width%3D%271.4%27%3E%0A%3Cpath%20d%3D%27M60%2090%20H100%20V160%27/%3E%0A%3Cpath%20d%3D%27M150%2090%20H190%20V50%27/%3E%0A%3Cpath%20d%3D%27M40%2040%20H10%27/%3E%0A%3C/g%3E%0A%3Cg%20fill%3D%27rgba%28168%2C208%2C255%2C0.4%29%27%3E%0A%3Ccircle%20cx%3D%2760%27%20cy%3D%2790%27%20r%3D%273%27/%3E%0A%3Ccircle%20cx%3D%27140%27%20cy%3D%2790%27%20r%3D%273%27/%3E%0A%3Ccircle%20cx%3D%27190%27%20cy%3D%27140%27%20r%3D%273%27/%3E%0A%3Ccircle%20cx%3D%27100%27%20cy%3D%27160%27%20r%3D%273%27/%3E%0A%3Ccircle%20cx%3D%2740%27%20cy%3D%2740%27%20r%3D%273%27/%3E%0A%3Ccircle%20cx%3D%27190%27%20cy%3D%2750%27%20r%3D%273%27/%3E%0A%3C/g%3E%0A%3Cg%20fill%3D%27rgba%2879%2C143%2C255%2C0.22%29%27%3E%0A%3Crect%20x%3D%27137%27%20y%3D%2787%27%20width%3D%276%27%20height%3D%276%27/%3E%0A%3Crect%20x%3D%2747%27%20y%3D%27147%27%20width%3D%276%27%20height%3D%276%27/%3E%0A%3Crect%20x%3D%27117%27%20y%3D%27197%27%20width%3D%276%27%20height%3D%276%27/%3E%0A%3Crect%20x%3D%27207%27%20y%3D%27177%27%20width%3D%276%27%20height%3D%276%27/%3E%0A%3C/g%3E%0A%3C/svg%3E");
+    background-size:auto, 240px 240px;
+    position:relative;
+    overflow-x:hidden;
+  }
+
+  /* fine grain for a less flat, more tactile surface */
+  body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:2;
+    pointer-events:none;
+    opacity:0.035;
+    mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' fill='white'/%3E%3C/svg%3E");
+  }
+
+  /* ambient drifting glow field behind everything */
+  .ambient{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+    overflow:hidden;
+  }
+  .glow-blob{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(90px);
+    opacity:0.35;
+    animation:drift 26s ease-in-out infinite;
+  }
+  .glow-blob.b1{
+    width:520px; height:520px;
+    top:-140px; left:-120px;
+    background:radial-gradient(circle, var(--copper-glow), transparent 70%);
+    animation-duration:24s;
+  }
+  .glow-blob.b2{
+    width:600px; height:600px;
+    top:35%; right:-200px;
+    background:radial-gradient(circle, var(--cyan-glow), transparent 70%);
+    animation-duration:30s;
+    animation-delay:-6s;
+  }
+  .glow-blob.b3{
+    width:460px; height:460px;
+    bottom:-160px; left:30%;
+    background:radial-gradient(circle, var(--copper-glow), transparent 70%);
+    animation-duration:28s;
+    animation-delay:-14s;
+  }
+  @keyframes drift{
+    0%, 100%{ transform:translate(0,0) scale(1); }
+    33%{ transform:translate(40px,-30px) scale(1.08); }
+    66%{ transform:translate(-30px,25px) scale(0.95); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .glow-blob{ animation:none; }
+  }
+
+  /* top shimmer accent line */
+  .shimmer-bar{
+    position:fixed;
+    top:0; left:0; right:0;
+    height:2px;
+    z-index:200;
+    background:linear-gradient(90deg, transparent, var(--copper), var(--cyan), var(--copper), transparent);
+    background-size:200% 100%;
+    animation:shimmer 6s linear infinite;
+  }
+  @keyframes shimmer{
+    0%{ background-position:200% 0; }
+    100%{ background-position:-200% 0; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .shimmer-bar{ animation:none; background-position:0 0; }
+  }
+
+  main, header, footer{ position:relative; z-index:1; }
+
+  /* animated PCB overlay — light pulses traveling along the circuit lines */
+  .pcb-live{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:0;
+    pointer-events:none;
+  }
+  .live-path{
+    fill:none;
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-dasharray:16 380;
+    opacity:0.85;
+  }
+  .lp-a{
+    stroke:var(--cyan);
+    filter:drop-shadow(0 0 5px var(--cyan-glow));
+    animation:travel 4.5s linear infinite;
+  }
+  .lp-b{
+    stroke:var(--copper);
+    filter:drop-shadow(0 0 5px var(--copper-glow));
+    animation:travel 3.6s linear infinite;
+    animation-delay:0.9s;
+  }
+  .lp-c{
+    stroke:var(--copper);
+    filter:drop-shadow(0 0 5px var(--copper-glow));
+    animation:travel 5.2s linear infinite;
+    animation-delay:1.8s;
+  }
+  .lp-d{
+    stroke:var(--cyan);
+    filter:drop-shadow(0 0 5px var(--cyan-glow));
+    animation:travel 4s linear infinite;
+    animation-delay:2.4s;
+  }
+  @keyframes travel{
+    from{ stroke-dashoffset:0; }
+    to{ stroke-dashoffset:-396; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .live-path{ animation:none; opacity:0.5; }
+  }
+
+  /* scroll reveal */
+  .reveal{
+    opacity:0;
+    transform:translateY(22px);
+    transition:opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.in-view{
+    opacity:1;
+    transform:translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+  }
+
+  h1,h2,h3{
+    font-family:'Big Shoulders Display', sans-serif;
+    font-weight:700;
+    letter-spacing:0.01em;
+    margin:0;
+  }
+
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+
+  a{ color:inherit; }
+
+  .sheet{
+    position:relative;
+    max-width:var(--sheet-max);
+    margin:0 auto;
+    padding:88px 32px;
+    border-left:1px solid var(--line-grid);
+    border-right:1px solid var(--line-grid);
+    scroll-margin-top:74px;
+  }
+
+  /* registration marks — corner crosshairs like PCB fiducials */
+  .sheet::before, .sheet::after{
+    content:"";
+    position:absolute;
+    width:16px; height:16px;
+    top:24px;
+    border-top:1px solid var(--line-strong);
+    opacity:0.7;
+  }
+  .sheet::before{ left:8px; border-left:1px solid var(--line-strong); }
+  .sheet::after{ right:8px; border-right:1px solid var(--line-strong); }
+
+  .sheet-tag{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.06em;
+    color:var(--ink-dim);
+    margin-bottom:48px;
+    padding-bottom:12px;
+    position:relative;
+  }
+  .sheet-tag::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:0;
+    height:1px;
+    background:linear-gradient(90deg, var(--line-strong), transparent 70%);
+  }
+  .sheet-tag span.dot{ color:var(--copper); }
+
+  /* ===== NAV ===== */
+  header{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:100;
+    background:rgba(6,11,26,0.86);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line-grid);
+  }
+  .nav-inner{
+    max-width:var(--sheet-max);
+    margin:0 auto;
+    padding:14px 32px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .brand{ display:flex; align-items:center; gap:10px; }
+  .brand-mark{
+    width:26px; height:26px;
+    border:1px solid var(--copper);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Big Shoulders Display', sans-serif;
+    font-weight:700; font-size:15px;
+    color:var(--copper);
+    overflow:hidden;
+  }
+  .brand-mark img{ width:100%; height:100%; object-fit:contain; padding:3px; }
+  .brand-name{ font-family:'Big Shoulders Display', sans-serif; font-weight:700; font-size:19px; letter-spacing:0.02em; }
+  nav ul{ display:flex; gap:26px; list-style:none; margin:0; padding:0; }
+  nav a{
+    text-decoration:none;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--ink-muted);
+    transition:color 0.15s ease;
+    position:relative;
+    padding-bottom:3px;
+  }
+  nav a:not(.nav-cta)::after{
+    content:"";
+    position:absolute;
+    left:0; bottom:0;
+    width:100%; height:1px;
+    background:var(--copper);
+    transform:scaleX(0);
+    transform-origin:left;
+    transition:transform 0.25s ease;
+  }
+  nav a:not(.nav-cta):hover::after{ transform:scaleX(1); }
+  nav a:hover{ color:var(--copper); }
+  nav a.active{ color:var(--copper); }
+  nav a.active::after{ transform:scaleX(1); }
+
+  .nav-cta{
+    border:1px solid var(--copper-dim);
+    padding:7px 14px;
+    color:var(--copper) !important;
+  }
+  .nav-cta:hover{ background:var(--copper); color:var(--bg-void) !important; }
+
+  #navToggle{
+    display:none;
+    background:none;
+    border:1px solid var(--line-strong);
+    width:38px; height:34px;
+    padding:0;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    cursor:pointer;
+  }
+  #navToggle span{
+    width:16px; height:1px;
+    background:var(--ink);
+    transition:transform 0.2s ease, opacity 0.2s ease;
+  }
+  #navToggle[aria-expanded="true"] span:nth-child(1){ transform:translateY(6px) rotate(45deg); }
+  #navToggle[aria-expanded="true"] span:nth-child(2){ opacity:0; }
+  #navToggle[aria-expanded="true"] span:nth-child(3){ transform:translateY(-6px) rotate(-45deg); }
+
+  @media (max-width:760px){
+    #navToggle{ display:flex; }
+    nav#mainNav{
+      position:fixed;
+      top:57px; left:0; right:0;
+      background:rgba(6,11,26,0.98);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line-grid);
+      max-height:0;
+      overflow:hidden;
+      transition:max-height 0.3s ease;
+    }
+    nav#mainNav.open{ max-height:340px; }
+    nav#mainNav ul{
+      display:flex;
+      flex-direction:column;
+      gap:0;
+      padding:8px 32px 20px;
+    }
+    nav#mainNav ul li{ border-bottom:1px solid var(--line-grid); }
+    nav#mainNav ul li:last-child{ border-bottom:none; margin-top:12px; }
+    nav#mainNav a{ display:block; padding:14px 0; font-size:14px; }
+    nav#mainNav .nav-cta{ display:inline-block; }
+  }
+
+  /* ===== HERO ===== */
+  .hero{ padding-top:150px; position:relative; overflow:hidden; isolation:isolate; }
+  .hero-backdrop{
+    position:absolute;
+    inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    z-index:-1;
+    opacity:0.22;
+    filter:grayscale(1) brightness(0.6) sepia(0.5) hue-rotate(175deg) saturate(2.4);
+    -webkit-mask-image:linear-gradient(to bottom, black, transparent 85%);
+    mask-image:linear-gradient(to bottom, black, transparent 85%);
+  }
+  .hero-meta{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--ink-dim);
+    letter-spacing:0.05em;
+    margin-bottom:28px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px 18px;
+  }
+  .badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:11.5px;
+    letter-spacing:0.06em;
+    color:var(--cyan);
+    border:1px solid var(--panel-glass-border);
+    background:var(--panel-glass);
+    backdrop-filter:blur(10px);
+    padding:7px 14px;
+    margin-bottom:22px;
+    box-shadow:0 0 24px -6px var(--copper-glow);
+  }
+  .badge::before{
+    content:"";
+    width:6px; height:6px;
+    border-radius:50%;
+    background:var(--cyan);
+    box-shadow:0 0 8px 2px var(--cyan-glow);
+  }
+
+  .hero h1{
+    font-size:clamp(2.4rem, 6vw, 4.6rem);
+    line-height:1.03;
+    max-width:14ch;
+    background:linear-gradient(100deg, var(--ink) 40%, var(--copper) 75%, var(--cyan) 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+
+  .brand-mark{ position:relative; }
+  .brand-mark::after{
+    content:"";
+    position:absolute;
+    inset:-4px;
+    border:1px solid var(--copper);
+    opacity:0.5;
+    animation:pulse-ring 2.4s ease-out infinite;
+  }
+  @keyframes pulse-ring{
+    0%{ transform:scale(1); opacity:0.5; }
+    100%{ transform:scale(1.6); opacity:0; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .brand-mark::after{ animation:none; display:none; }
+  }
+  .hero-sub{
+    max-width:52ch;
+    margin-top:26px;
+    color:var(--ink-muted);
+    font-size:1.05rem;
+  }
+  .hero-ctas{ display:flex; gap:14px; margin-top:38px; flex-wrap:wrap; }
+  .btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    padding:13px 22px;
+    text-decoration:none;
+    display:inline-block;
+    position:relative;
+    overflow:hidden;
+    border:1px solid var(--line-strong);
+    color:var(--ink);
+    transition:border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+  }
+  .btn:hover{
+    border-color:var(--copper);
+    color:var(--copper);
+    box-shadow:0 0 22px -4px var(--copper-glow);
+    transform:translateY(-1px);
+  }
+  .btn-solid{
+    background:var(--copper);
+    border-color:var(--copper);
+    color:var(--bg-void);
+  }
+  .btn-solid:hover{
+    background:transparent;
+    color:var(--copper);
+    box-shadow:0 0 26px -2px var(--copper-glow);
+  }
+
+  .schematic-wrap{ margin-top:70px; }
+  .schematic-wrap svg{ width:100%; height:auto; display:block; }
+  .trace{
+    fill:none;
+    stroke:var(--copper-dim);
+    stroke-width:1.4;
+    stroke-dasharray:400;
+    stroke-dashoffset:400;
+    animation:draw 1.8s ease forwards;
+  }
+  .trace.t2{ animation-delay:0.25s; stroke:var(--cyan); opacity:0.55;}
+  .trace.t3{ animation-delay:0.5s; }
+  .trace.t4{ animation-delay:0.75s; stroke:var(--cyan); opacity:0.55;}
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+  .node-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    fill:var(--ink-muted);
+    letter-spacing:0.04em;
+  }
+  .node-dot{ fill:var(--bg-void); stroke:var(--copper); stroke-width:1.3; }
+  .center-dot{
+    fill:var(--copper);
+    animation:pulse-dot 2.4s ease-in-out infinite;
+    transform-origin:450px 110px;
+  }
+  @keyframes pulse-dot{
+    0%, 100%{ opacity:1; }
+    50%{ opacity:0.55; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .center-dot{ animation:none; }
+  }
+
+  /* ===== PROCESS RAIL ===== */
+  .rail{
+    display:flex;
+    align-items:stretch;
+    margin-top:20px;
+    border-top:1px solid var(--line-grid);
+    border-bottom:1px solid var(--line-grid);
+  }
+  .rail-step{
+    flex:1;
+    padding:22px 16px;
+    border-right:1px solid var(--line-grid);
+    text-align:center;
+  }
+  .rail-step:last-child{ border-right:none; }
+  .rail-step .n{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--copper);
+  }
+  .rail-step .l{
+    font-family:'Big Shoulders Display', sans-serif;
+    font-weight:600;
+    font-size:1.05rem;
+    margin-top:6px;
+  }
+  @media (max-width:700px){
+    .rail{ flex-direction:column; }
+    .rail-step{ border-right:none; border-bottom:1px solid var(--line-grid); text-align:left; }
+    .rail-step:last-child{ border-bottom:none; }
+  }
+
+  .lede{
+    font-family:'Big Shoulders Display', sans-serif;
+    font-weight:600;
+    font-size:clamp(1.5rem, 3vw, 2.1rem);
+    max-width:20ch;
+    margin-top:32px;
+    color:var(--ink);
+  }
+
+  /* ===== SECTION HEADS ===== */
+  .section-head{ margin-bottom:52px; }
+  .section-head .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--copper);
+    margin-bottom:10px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .section-head .kicker::before{
+    content:"";
+    width:16px; height:1px;
+    background:var(--copper);
+  }
+  .section-head h2{ font-size:clamp(1.8rem, 3.4vw, 2.6rem); }
+  .section-head p{ color:var(--ink-muted); max-width:56ch; margin-top:14px; }
+
+  /* ===== COMPONENT CARDS (capability grid) ===== */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:1px;
+    background:var(--line-grid);
+    border:1px solid var(--line-grid);
+  }
+  @media (max-width:700px){ .grid{ grid-template-columns:1fr; } }
+
+  .chip{
+    background:var(--panel-glass);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    padding:32px;
+    position:relative;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.04);
+    transition:background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  }
+  .chip:hover{
+    background:rgba(24,44,88,0.7);
+    box-shadow:inset 0 0 0 1px var(--copper-dim), 0 20px 44px -22px var(--copper-glow);
+    transform:translateY(-4px);
+  }
+  .chip:hover h3{ color:var(--copper); }
+  .chip h3{ transition:color 0.2s ease; }
+  .chip-icon{
+    width:34px; height:34px;
+    margin-bottom:16px;
+    color:var(--cyan);
+  }
+  .chip-icon svg{ width:100%; height:100%; }
+  .chip::before, .chip::after{
+    content:"";
+    position:absolute;
+    width:8px; height:8px;
+    background:var(--bg-void);
+    border:1px solid var(--copper-dim);
+    top:-4px;
+  }
+  .chip::before{ left:20px; }
+  .chip::after{ right:20px; }
+  .chip .pin{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--ink-dim);
+    margin-bottom:10px;
+  }
+  .chip h3{ font-size:1.3rem; margin-bottom:8px; }
+  .chip .desc{ color:var(--ink-muted); font-size:0.92rem; margin-bottom:16px; }
+  .chip ul{ margin:0; padding:0; list-style:none; }
+  .chip li{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--ink-muted);
+    padding:6px 0;
+    border-top:1px solid var(--line-grid);
+  }
+  .chip li:first-child{ border-top:none; }
+  .chip li::before{ content:"— "; color:var(--copper-dim); }
+
+  /* ===== TERMINAL PANELS (software) ===== */
+  .term-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:20px;
+  }
+  @media (max-width:700px){ .term-grid{ grid-template-columns:1fr; } }
+  .term{
+    background:var(--panel-glass);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    border:1px solid var(--panel-glass-border);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.04);
+    transition:border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  }
+  .term:hover{
+    border-color:var(--cyan);
+    box-shadow:0 20px 44px -24px var(--cyan-glow);
+    transform:translateY(-4px);
+  }
+  .term-bar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px 14px;
+    border-bottom:1px solid var(--line-grid);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--ink-dim);
+  }
+  .term-bar .stack{ color:var(--copper); }
+  .term-body{ padding:18px 14px; font-family:'IBM Plex Mono', monospace; font-size:12.5px; }
+  .term-body h3{
+    font-family:'Big Shoulders Display', sans-serif;
+    font-size:1.15rem;
+    margin-bottom:4px;
+    color:var(--ink);
+  }
+  .term-body .role{ color:var(--ink-muted); font-size:12.5px; margin-bottom:14px; }
+  .term-line{ color:var(--ink-dim); margin:3px 0; }
+  .term-line .ok{ color:var(--cyan); }
+  .term-line .cursor{ color:var(--copper); }
+
+  /* ===== WORK GRID ===== */
+  .work-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1px;
+    background:var(--line-grid);
+    border:1px solid var(--line-grid);
+  }
+  @media (max-width:900px){ .work-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:600px){ .work-grid{ grid-template-columns:1fr; } }
+  .work-card{
+    background:var(--panel-glass);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    padding:28px;
+    min-height:190px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.04);
+    transition:background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  }
+  .work-card:hover{
+    background:rgba(24,44,88,0.7);
+    box-shadow:inset 0 0 0 1px var(--copper-dim), 0 20px 44px -22px var(--copper-glow);
+    transform:translateY(-4px);
+  }
+  .work-card:hover h3{ color:var(--copper); }
+  .work-card h3{ transition:color 0.2s ease; }
+  .work-card .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    color:var(--copper);
+    letter-spacing:0.04em;
+  }
+  .work-card h3{ font-size:1.25rem; margin:10px 0 8px; }
+  .work-card .spec{ color:var(--ink-muted); font-size:0.88rem; }
+
+  /* ===== CONTACT ===== */
+  .contact-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+  }
+  @media (max-width:800px){ .contact-grid{ grid-template-columns:1fr; gap:40px; } }
+  .info-block{ margin-bottom:30px; }
+  .info-block .k{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--ink-dim);
+    margin-bottom:6px;
+  }
+  .info-block .v{ color:var(--ink); font-size:1rem; }
+  .info-block .v a{ color:var(--copper); text-decoration:none; }
+
+  form{ display:flex; flex-direction:column; gap:14px; }
+  form input, form select, form textarea{
+    background:var(--bg-panel);
+    border:1px solid var(--line-grid);
+    color:var(--ink);
+    padding:12px 14px;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:14px;
+  }
+  form input:focus, form select:focus, form textarea:focus{
+    outline:none;
+    border-color:var(--copper);
+  }
+  form textarea{ resize:vertical; min-height:100px; }
+  form label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--ink-dim);
+    margin-bottom:-8px;
+  }
+  form button{
+    margin-top:8px;
+    align-self:flex-start;
+  }
+
+  .title-block{
+    margin-top:90px;
+    padding-top:30px;
+    border-top:1px solid var(--line-grid);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:20px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--ink-dim);
+  }
+
+  footer{
+    text-align:center;
+    padding:30px 20px 50px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--ink-dim);
+  }
+
+  :focus-visible{ outline:2px solid var(--copper); outline-offset:2px; }
+
+  /* ===== SPLASH INTRO ===== */
+  .splash{
+    position:fixed;
+    inset:0;
+    z-index:500;
+    background:var(--bg-void);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:opacity 0.7s ease, visibility 0.7s ease;
+  }
+  .splash.hide{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+  }
+  .splash-inner{ text-align:center; position:relative; }
+  .splash-glow{
+    position:absolute;
+    left:50%; top:50%;
+    width:640px; height:640px;
+    transform:translate(-50%,-50%);
+    background:radial-gradient(circle, rgba(79,143,255,0.38), rgba(79,143,255,0.08) 45%, transparent 70%);
+    filter:blur(6px);
+    z-index:-1;
+  }
+  .splash-logo{
+    max-width:min(72vw, 460px);
+    width:100%;
+    height:auto;
+    opacity:0;
+    filter:drop-shadow(0 0 34px var(--copper-glow));
+    animation:splashIn 0.8s ease forwards;
+  }
+  .splash-sparkles{ position:absolute; inset:-20%; pointer-events:none; }
+  .spark{
+    position:absolute;
+    width:7px; height:7px;
+    background:var(--cyan);
+    clip-path:polygon(50% 0%, 0% 100%, 100% 100%);
+    opacity:0;
+    filter:drop-shadow(0 0 6px var(--cyan-glow));
+    animation:sparkle 2.6s ease-in-out infinite;
+  }
+  @keyframes sparkle{
+    0%, 100%{ opacity:0; transform:scale(0.5) rotate(0deg); }
+    50%{ opacity:0.9; transform:scale(1.1) rotate(12deg); }
+  }
+  .splash-line{
+    width:0;
+    height:2px;
+    margin:22px auto 0;
+    background:linear-gradient(90deg, transparent, var(--copper), transparent);
+    animation:splashLine 0.9s ease 0.5s forwards;
+  }
+  @keyframes splashIn{
+    from{ opacity:0; transform:scale(0.9); }
+    to{ opacity:1; transform:scale(1); }
+  }
+  @keyframes splashLine{
+    from{ width:0; }
+    to{ width:140px; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .splash{ display:none; }
+    .splash-logo, .splash-line, .spark{ animation:none; }
+  }
+
+  /* elements that pop in after the splash intro finishes */
+  .hero-pop{
+    opacity:0;
+    transform:translateY(18px);
+    transition:opacity 0.6s ease, transform 0.6s ease;
+  }
+  .hero-pop.in-view{
+    opacity:1;
+    transform:translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero-pop{ opacity:1; transform:none; transition:none; }
+  }
+
+  .whatsapp-float{
+    position:fixed;
+    right:22px;
+    bottom:22px;
+    z-index:150;
+    width:52px; height:52px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--copper);
+    color:var(--bg-void);
+    border-radius:50%;
+    box-shadow:0 10px 30px -8px var(--copper-glow);
+    transition:transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .whatsapp-float svg{ width:26px; height:26px; }
+  .whatsapp-float:hover{
+    transform:translateY(-3px) scale(1.05);
+    box-shadow:0 14px 36px -6px var(--copper-glow);
+  }
+  @media (max-width:600px){
+    .whatsapp-float{ right:16px; bottom:16px; width:48px; height:48px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="splash" class="splash" aria-hidden="true">
+  <div class="splash-inner">
+    <div class="splash-glow"></div>
+    <div class="splash-sparkles">
+      <span class="spark" style="top:18%; left:20%; animation-delay:0s;"></span>
+      <span class="spark" style="top:70%; left:15%; animation-delay:0.4s;"></span>
+      <span class="spark" style="top:25%; left:82%; animation-delay:0.8s;"></span>
+      <span class="spark" style="top:75%; left:80%; animation-delay:1.2s;"></span>
+      <span class="spark" style="top:50%; left:8%; animation-delay:0.6s;"></span>
+      <span class="spark" style="top:12%; left:55%; animation-delay:1.0s;"></span>
+      <span class="spark" style="top:85%; left:50%; animation-delay:0.2s;"></span>
+      <span class="spark" style="top:45%; left:92%; animation-delay:1.4s;"></span>
+    </div>
+    <img class="splash-logo" src="https://vast.science/asset/vast_logo_white.png" alt="VAST">
+    <div class="splash-line"></div>
+  </div>
+</div>
+
+<div class="shimmer-bar"></div>
+<div class="ambient" aria-hidden="true">
+  <div class="glow-blob b1"></div>
+  <div class="glow-blob b2"></div>
+  <div class="glow-blob b3"></div>
+</div>
+
+<svg class="pcb-live" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="livePattern" width="240" height="240" patternUnits="userSpaceOnUse">
+      <path class="live-path lp-a" d="M0 40 H60 V90 H140"/>
+      <path class="live-path lp-b" d="M240 60 H180 V20"/>
+      <path class="live-path lp-c" d="M0 150 H50 V200 H120 V240"/>
+      <path class="live-path lp-d" d="M240 180 H190 V140 H150 V90"/>
+      <path class="live-path lp-a" d="M100 0 V40 H40"/>
+      <path class="live-path lp-b" d="M160 240 V190 H210"/>
+      <path class="live-path lp-c" d="M60 90 H100 V160"/>
+      <path class="live-path lp-d" d="M150 90 H190 V50"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#livePattern)"/>
+</svg>
+
+<header>
+  <div class="nav-inner">
+    <div class="brand">
+      <div class="brand-mark"><img src="https://vast.science/asset/vast_logo_white.png" alt="VAST" onerror="this.style.display='none'; this.parentElement.textContent='V';"></div>
+      <div class="brand-name">VAST</div>
+    </div>
+    <nav id="mainNav">
+      <ul>
+        <li><a href="#expertise">Expertise</a></li>
+        <li><a href="#manufacturing">Manufacturing</a></li>
+        <li><a href="#hardware">Hardware</a></li>
+        <li><a href="#software">Software</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#contact" class="nav-cta">Contact</a></li>
+      </ul>
+    </nav>
+    <button id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mainNav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="sheet hero" id="top">
+  <img class="hero-backdrop" src="https://vast.science/og-image.jpg" alt="" aria-hidden="true" onerror="this.style.display='none';">
+  <div class="hero-meta mono">
+    <span>DOC: VAST&#8209;OVERVIEW</span>
+    <span>REV: C</span>
+    <span>ORIGIN: CHENNAI IN &middot; SINGAPORE SG</span>
+  </div>
+  <div class="badge mono hero-pop">Full-spectrum hardware engineering</div>
+  <h1 class="hero-pop">We build the boards, the firmware, and the factories that run on them.</h1>
+  <p class="hero-sub hero-pop">VAST is a full-spectrum hardware engineering company. One team designs the circuit board, writes the firmware that runs on it, and manufactures the finished product — concept through production, without handing the project between vendors.</p>
+  <div class="hero-ctas hero-pop">
+    <a href="#work" class="btn btn-solid">See our work</a>
+    <a href="https://api.whatsapp.com/send?phone=+91%2097918%2072432&text=Hi%2C%0AI%20would%20like%20a%20consultation%20for%20a%20new%20Product%20Development" class="btn">Start a project</a>
+  </div>
+
+  <div class="schematic-wrap hero-pop">
+    <svg viewBox="0 0 900 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram connecting VAST to its four core capabilities: PCB, Firmware, EMS and Products">
+      <line class="trace t1" x1="450" y1="110" x2="180" y2="40" />
+      <line class="trace t2" x1="450" y1="110" x2="180" y2="180" />
+      <line class="trace t3" x1="450" y1="110" x2="720" y2="40" />
+      <line class="trace t4" x1="450" y1="110" x2="720" y2="180" />
+
+      <circle class="node-dot" cx="180" cy="40" r="4" />
+      <circle class="node-dot" cx="180" cy="180" r="4" />
+      <circle class="node-dot" cx="720" cy="40" r="4" />
+      <circle class="node-dot" cx="720" cy="180" r="4" />
+      <circle class="center-dot" cx="450" cy="110" r="5" />
+
+      <text class="node-label" x="150" y="30">PCB DESIGN</text>
+      <text class="node-label" x="145" y="200">FIRMWARE</text>
+      <text class="node-label" x="690" y="30">EMS / MFG</text>
+      <text class="node-label" x="700" y="200">PRODUCTS</text>
+      <text class="node-label" x="425" y="95" fill="#4f8fff">VAST</text>
+    </svg>
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+<section class="sheet reveal" id="expertise">
+  <div class="sheet-tag"><span>SHEET 01 <span class="dot">&middot;</span> OUR EXPERTISE</span><span>SCALE: FULL LIFECYCLE</span></div>
+  <p class="lede">From concept to delivery — one team across the full product lifecycle.</p>
+  <div class="rail">
+    <div class="rail-step"><div class="n mono">01</div><div class="l">Concept</div></div>
+    <div class="rail-step"><div class="n mono">02</div><div class="l">Design</div></div>
+    <div class="rail-step"><div class="n mono">03</div><div class="l">Prototype</div></div>
+    <div class="rail-step"><div class="n mono">04</div><div class="l">Manufacture</div></div>
+    <div class="rail-step"><div class="n mono">05</div><div class="l">Product</div></div>
+  </div>
+</section>
+
+<!-- MANUFACTURING -->
+<section class="sheet reveal" id="manufacturing">
+  <div class="sheet-tag"><span>SHEET 02 <span class="dot">&middot;</span> MANUFACTURING SERVICES</span><span>WHERE BLUEPRINTS MEET REALITY</span></div>
+  <div class="section-head">
+    <div class="kicker mono">MFG.SERVICE</div>
+    <h2>Precision at scale</h2>
+    <p>Rapid prototyping, contract assembly, validation, and support for products already in the field.</p>
+  </div>
+  <div class="grid">
+    <div class="chip">
+      <div class="chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3 21 8 12 13 3 8Z"/><path d="M3 12l9 5 9-5"/><path d="M3 16l9 5 9-5"/></svg></div>
+      <div class="pin">MFG&#8209;01</div>
+      <h3>Advanced Rapid Prototyping</h3>
+      <div class="desc">From CAD to physical — in weeks.</div>
+      <ul>
+        <li>Multi-Jet &amp; Poly-Jet fusion</li>
+        <li>SLA &amp; FDM 3D printing</li>
+        <li>Vacuum casting</li>
+        <li>Low-volume injection molding</li>
+      </ul>
+    </div>
+    <div class="chip">
+      <div class="chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="4" y="4" width="6" height="6"/><rect x="14" y="4" width="6" height="6"/><rect x="4" y="14" width="6" height="6"/><rect x="14" y="14" width="6" height="6"/></svg></div>
+      <div class="pin">MFG&#8209;02</div>
+      <h3>EMS Service</h3>
+      <div class="desc">Precision assembly at scale, from first build to volume production.</div>
+      <ul>
+        <li>Electronics manufacturing services</li>
+        <li>Component sourcing &amp; sub-assembly</li>
+        <li>Volume production ramp</li>
+      </ul>
+    </div>
+    <div class="chip">
+      <div class="chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6Z"/><path d="M9 12l2 2 4-4"/></svg></div>
+      <div class="pin">MFG&#8209;03</div>
+      <h3>Quality &amp; Testing</h3>
+      <div class="desc">End-to-end validation before anything ships.</div>
+      <ul>
+        <li>Functional test fixtures</li>
+        <li>Burn-in &amp; environmental testing</li>
+        <li>Compliance &amp; safety checks</li>
+      </ul>
+    </div>
+    <div class="chip">
+      <div class="chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/><path d="M12 8v4l3 2"/></svg></div>
+      <div class="pin">MFG&#8209;04</div>
+      <h3>Reverse Engineering</h3>
+      <div class="desc">Extending support for legacy products.</div>
+      <ul>
+        <li>Legacy board &amp; firmware analysis</li>
+        <li>Obsolete part replacement</li>
+        <li>Documentation recovery</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- HARDWARE -->
+<section class="sheet reveal" id="hardware">
+  <div class="sheet-tag"><span>SHEET 03 <span class="dot">&middot;</span> HARDWARE ENGINEERING</span><span>SILICON TO SYSTEMS</span></div>
+  <div class="section-head">
+    <div class="kicker mono">HW.ENGINEERING</div>
+    <h2>The foundation of intelligence</h2>
+    <p>Board-level engineering for products that need to work the first time — and every time after.</p>
+  </div>
+  <div class="grid">
+    <div class="chip">
+      <div class="chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="4" y="4" width="16" height="4"/><rect x="4" y="10" width="16" height="4"/><rect x="4" y="16" width="16" height="4"/></svg></div>
+      <div class="pin">HW&#8209;01</div>
+      <h3>Multilayer PCB Design</h3>
+      <div class="desc">Up to 16 layers, signal- and power-integrity aware.</div>
+      <ul>
+        <li>Stack-up planning up to 16 layers</li>
+        <li>High-speed bus &amp; DDR validation</li>
+        <li>HDI micro-via (2mil &times; 2mil)</li>
+        <li>Power plane split &amp; decoupling design</li>
+      </ul>
+    </div>
+    <div class="chip">
+      <div class="chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 20V10"/><path d="M12 10 6 4"/><path d="M8 8a5.7 5.7 0 0 1 8 0"/><path d="M5.5 5.5a9.5 9.5 0 0 1 13 0"/></svg></div>
+      <div class="pin">HW&#8209;02</div>
+      <h3>RF Antenna Design</h3>
+      <div class="desc">Controlled impedance and EMI-aware routing.</div>
+      <ul>
+        <li>Antenna matching &amp; tuning</li>
+        <li>Controlled impedance traces</li>
+        <li>EMI/EMC mitigation</li>
+      </ul>
+    </div>
+    <div class="chip">
+      <div class="chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 12h4l2-7 4 14 3-10 2 3h5"/></svg></div>
+      <div class="pin">HW&#8209;03</div>
+      <h3>SI/PI Validation</h3>
+      <div class="desc">Signal- and power-integrity simulation before spin one.</div>
+      <ul>
+        <li>Eye-diagram &amp; timing analysis</li>
+        <li>Power delivery network simulation</li>
+        <li>Pre-layout &amp; post-layout checks</li>
+      </ul>
+    </div>
+    <div class="chip">
+      <div class="chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3 20 7.5v9L12 21 4 16.5v-9Z"/><path d="M4 7.5 12 12l8-4.5"/><path d="M12 12v9"/></svg></div>
+      <div class="pin">HW&#8209;04</div>
+      <h3>3D Modeling (DFM)</h3>
+      <div class="desc">Design for manufacturability, built in from the start.</div>
+      <ul>
+        <li>Enclosure &amp; mechanical fit</li>
+        <li>Tolerance &amp; assembly review</li>
+        <li>Thermal &amp; structural checks</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SOFTWARE -->
+<section class="sheet reveal" id="software">
+  <div class="sheet-tag"><span>SHEET 04 <span class="dot">&middot;</span> SOFTWARE ENGINEERING</span><span>BARE METAL TO CLOUD</span></div>
+  <div class="section-head">
+    <div class="kicker mono">SW.ENGINEERING</div>
+    <h2>Every layer of the stack</h2>
+    <p>From bare-metal firmware to the cloud services a product talks to, built by the same team that designed the board.</p>
+  </div>
+  <div class="term-grid">
+    <div class="term">
+      <div class="term-bar"><span>firmware_v2.c</span><span class="stack">C / C++ / RTOS</span></div>
+      <div class="term-body">
+        <h3>Embedded C / C++ / RTOS</h3>
+        <div class="role">Low-level I/O control</div>
+        <div class="term-line">Compiling main.c... <span class="ok">OK</span></div>
+        <div class="term-line">Linking RTOS kernel... <span class="ok">OK</span></div>
+        <div class="term-line">Target: Cortex-M4 (bare-metal)</div>
+        <div class="term-line"><span class="cursor">_</span></div>
+      </div>
+    </div>
+    <div class="term">
+      <div class="term-bar"><span>linux_bsp.sh</span><span class="stack">Embedded Linux</span></div>
+      <div class="term-body">
+        <h3>Embedded Linux / Unix</h3>
+        <div class="role">OS porting using BSP</h3>
+        <div class="term-line">Building device tree overlay...</div>
+        <div class="term-line">Patching kernel 5.10.x... <span class="ok">done</span></div>
+        <div class="term-line">Root FS generation complete</div>
+        <div class="term-line"><span class="cursor">_</span></div>
+      </div>
+    </div>
+    <div class="term">
+      <div class="term-bar"><span>deploy.yml</span><span class="stack">Cloud / DevOps</span></div>
+      <div class="term-body">
+        <h3>Cloud / DevOps</h3>
+        <div class="role">Serverless architecture</div>
+        <div class="term-line">Initializing backend... <span class="ok">OK</span></div>
+        <div class="term-line">Deploying IoT core rules...</div>
+        <div class="term-line">API endpoint ready</div>
+        <div class="term-line"><span class="cursor">_</span></div>
+      </div>
+    </div>
+    <div class="term">
+      <div class="term-bar"><span>app.py</span><span class="stack">Full Stack</span></div>
+      <div class="term-body">
+        <h3>Packaged Software</h3>
+        <div class="role">Python / Node / .NET</div>
+        <div class="term-line">Serving app 'app'...</div>
+        <div class="term-line">Running on :5000</div>
+        <div class="term-line">Debugger active</div>
+        <div class="term-line"><span class="cursor">_</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="sheet reveal" id="work">
+  <div class="sheet-tag"><span>SHEET 05 <span class="dot">&middot;</span> IP PRODUCTS</span><span>OUR WORK</span></div>
+  <div class="section-head">
+    <div class="kicker mono">PRODUCTS.SHIPPED</div>
+    <h2>Concept to product, in-house</h2>
+    <p>A sample of what the same team has taken from sketch to shipping hardware.</p>
+  </div>
+  <div class="work-grid">
+    <div class="work-card">
+      <div><div class="tag mono">IP PRODUCT</div><h3>Smart Ring</h3><div class="spec">Voice · haptic · on-device storage, in an 8mm titanium profile. 72h battery.</div></div>
+    </div>
+    <div class="work-card">
+      <div><div class="tag mono">MEDICAL GRADE</div><h3>Hybrid Smart Watch</h3><div class="spec">Watch movement, health sensing, and realtime data in one case.</div></div>
+    </div>
+    <div class="work-card">
+      <div><div class="tag mono">DESIGN</div><h3>SDR-based NIC</h3><div class="spec">Embedded Linux · IEEE 802.3x · Ethernet.</div></div>
+    </div>
+    <div class="work-card">
+      <div><div class="tag mono">INDUSTRIAL</div><h3>IoT Energy Meter &amp; Analyzer</h3><div class="spec">SCADA-ready, realtime monitoring with preventive maintenance alerts.</div></div>
+    </div>
+    <div class="work-card">
+      <div><div class="tag mono">IN PRODUCTION</div><h3>Smart Air Purifier</h3><div class="spec">Air-quality index, high-speed filtration, IS 17531 certified.</div></div>
+    </div>
+    <div class="work-card">
+      <div><div class="tag mono">IN PRODUCTION</div><h3>Smart Home Touch Panel</h3><div class="spec">BLE-connected touch panel for whole-home control.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="sheet reveal" id="contact">
+  <div class="sheet-tag"><span>SHEET 06 <span class="dot">&middot;</span> GET IN TOUCH</span><span>EVERY GREAT PRODUCT STARTS WITH A GREAT TEAM</span></div>
+
+  <div class="contact-grid">
+    <div>
+      <div class="info-block">
+        <div class="k mono">INDIA HQ</div>
+        <div class="v">Plot No. 277, 2nd Floor, 4th Main Road,<br>Burma Colony, Perungudi,<br>Chennai &ndash; 600 096</div>
+      </div>
+      <div class="info-block">
+        <div class="k mono">CONNECT ON WHATSAPP</div>
+        <div class="v"><a href="https://api.whatsapp.com/send?phone=+91%2097918%2072432&text=Hi%2C%0AI%20would%20like%20a%20consultation%20for%20a%20new%20Product%20Development">+91 97918 72432</a></div>
+      </div>
+      <div class="info-block">
+        <div class="k mono">REGISTERED AS</div>
+        <div class="v">VANAN ADVANCED SCIENCES AND TECHNOLOGY PRIVATE LIMITED<br>CIN: U72900TN2019PTC127915</div>
+      </div>
+    </div>
+
+    <form id="contactForm">
+      <label for="name">NAME</label>
+      <input type="text" id="name" required>
+      <label for="email">EMAIL</label>
+      <input type="email" id="email" required>
+      <label for="subject">SUBJECT</label>
+      <select id="subject">
+        <option>New product development</option>
+        <option>PCB / hardware design</option>
+        <option>Firmware / software</option>
+        <option>Manufacturing / EMS</option>
+        <option>Something else</option>
+      </select>
+      <label for="message">MESSAGE</label>
+      <textarea id="message" required></textarea>
+      <button type="submit" class="btn btn-solid">Send message</button>
+      <div id="formStatus" class="mono" style="font-size:12px; color:var(--cyan); min-height:16px;"></div>
+    </form>
+  </div>
+
+  <div class="title-block">
+    <span>DRAWN: VAST TEAM</span>
+    <span>SHEET 06 OF 06</span>
+    <span>&copy; VANAN ADVANCED SCIENCES AND TECHNOLOGY PVT. LTD.</span>
+  </div>
+</section>
+
+<footer>
+  Driven by a passion for innovation and dedication to exceed expectations.
+</footer>
+
+<a class="whatsapp-float" href="https://api.whatsapp.com/send?phone=+91%2097918%2072432&text=Hi%2C%0AI%20would%20like%20a%20consultation%20for%20a%20new%20Product%20Development" aria-label="Chat with VAST on WhatsApp" target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20l1.3-4.2A8 8 0 1 1 8.7 19L4 20Z"/><path d="M8.5 9.5c0 3 2.5 5.5 5.5 5.5"/></svg>
+</a>
+
+<script>
+  (function(){
+    var splash = document.getElementById('splash');
+    var heroPops = document.querySelectorAll('.hero-pop');
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if(reduceMotion){
+      splash.style.display = 'none';
+      heroPops.forEach(function(el){ el.classList.add('in-view'); });
+    } else {
+      document.body.style.overflow = 'hidden';
+      setTimeout(function(){
+        splash.classList.add('hide');
+        document.body.style.overflow = '';
+        heroPops.forEach(function(el, i){
+          setTimeout(function(){ el.classList.add('in-view'); }, i * 160);
+        });
+        setTimeout(function(){ if(splash && splash.parentNode){ splash.parentNode.removeChild(splash); } }, 800);
+      }, 1300);
+    }
+  })();
+
+  var navToggle = document.getElementById('navToggle');
+  var mainNav = document.getElementById('mainNav');
+  navToggle.addEventListener('click', function(){
+    var isOpen = mainNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  mainNav.querySelectorAll('a').forEach(function(link){
+    link.addEventListener('click', function(){
+      mainNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  var navLinks = document.querySelectorAll('nav a[href^="#"]');
+  var sections = Array.prototype.map.call(navLinks, function(link){
+    return document.querySelector(link.getAttribute('href'));
+  }).filter(Boolean);
+
+  if('IntersectionObserver' in window){
+    var navObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          var id = '#' + entry.target.id;
+          navLinks.forEach(function(link){
+            link.classList.toggle('active', link.getAttribute('href') === id);
+          });
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    sections.forEach(function(sec){ navObserver.observe(sec); });
+  }
+
+  var revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('in-view'); });
+  }
+
+  document.getElementById('contactForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = document.getElementById('name').value;
+    var email = document.getElementById('email').value;
+    var subject = document.getElementById('subject').value;
+    var message = document.getElementById('message').value;
+    var body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\n' + message);
+    window.location.href = 'mailto:?subject=' + encodeURIComponent('VAST enquiry: ' + subject) + '&body=' + body;
+    var status = document.getElementById('formStatus');
+    status.textContent = 'Opening your email app to send this...';
+  });
+</script>
+
+</body>
+</html>
